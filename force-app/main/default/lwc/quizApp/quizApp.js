@@ -2,14 +2,13 @@ import { LightningElement } from 'lwc';
 
 export default class QuizApp extends LightningElement {
 
-    selected = {}
-    correctAnswers = 0
-    isSubmitted = false
-
+    selected = {} // for storing answers
+    correctAnswers = 0 //to show the number of correct answers
+    isSubmitted = false // use to show the result
     myQuestions = [
         {
             id: "Question1",
-            question: "Which one of the following is not a for loop?",
+            question: "Which one of the following is not a template loop?",
             answers: {
                 a: "for:each",
                 b: "iterator",
@@ -19,7 +18,7 @@ export default class QuizApp extends LightningElement {
         },
         {
             id: "Question2",
-            question: "Which one of the file is invalid in LWC component folder?",
+            question: "Which of the file is invald in LWC component folder?",
             answers: {
                 a: ".svg",
                 b: ".apex",
@@ -29,7 +28,7 @@ export default class QuizApp extends LightningElement {
         },
         {
             id: "Question3",
-            question: "Which one of the following is not a directive?",
+            question: "WHich one of the following is not a directive?",
             answers: {
                 a: "for:each",
                 b: "if:true",
@@ -44,7 +43,8 @@ export default class QuizApp extends LightningElement {
     }
 
     get isScoredFull() {
-        return `slds-text-heading_large ${this.myQuestions.length === this.correctAnswers ? 'slds-text-color_success' : 'slds-text-color_error'}`
+        return `slds-text-heading_large ${this.myQuestions.length === this.correctAnswers ?
+            'slds-text-color_success' : 'slds-text-color_error'}`
     }
 
     changeHandler(event) {
@@ -54,7 +54,7 @@ export default class QuizApp extends LightningElement {
 
     submitHandler(event) {
         event.preventDefault()
-        let correct = this.myQuestions.filter(item => item.selected[item.id] === item.correctAnswer)
+        let correct = this.myQuestions.filter(item => this.selected[item.id] === item.correctAnswer)
         this.correctAnswers = correct.length
         this.isSubmitted = true
     }
